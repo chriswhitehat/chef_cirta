@@ -15,7 +15,7 @@ dirs = ['/nsm',
         '/nsm/scripts/python',
         '/nsm/scripts/python/cirta']
 
-dirs.each |dir| do
+dirs.each do |dir|
   directory dir do
     owner 'root'
     group 'ir'

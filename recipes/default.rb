@@ -25,7 +25,7 @@ dirs.each do |dir|
 end
 
 git '/nsm/scripts/python/cirta' do
-  repository 'https://github.com:chriswhitehat/cirta.git'
+  repository 'https://github.com/chriswhitehat/cirta.git'
   reference 'master'
   user 'root'
   group 'ir'

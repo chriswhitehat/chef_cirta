@@ -4,11 +4,6 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-group 'ir' do
-  action :create
-  gid 999
-end
-
 
 dirs = ['/nsm',
         '/nsm/scripts',

@@ -13,6 +13,11 @@ execute 'pip_pytz' do
   not_if do ::Dir.exists?('/usr/local/lib/python2.7/dist-packages/pytz') end
 end
 
+execute 'pip_splunk-sdk' do
+  command 'pip install splunk-sdk'
+  action :run
+end
+
 
 dirs = ['/nsm',
         '/nsm/scripts',

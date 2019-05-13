@@ -7,17 +7,17 @@
 package ['git', 'python2.7', 'python-ldap', 'python-pip']
 
 
-execute 'pip_pytz' do
-  command 'pip install pytz'
-  action :run
-  not_if do ::Dir.exists?('/usr/local/lib/python2.7/dist-packages/pytz') end
-end
+pip_packages = [('pytz', 'pytz'),
+                ('splunk-sdk', 'splunklib'),
+                ('paramiko', 'paramiko')]
 
-execute 'pip_splunk-sdk' do
-  command 'pip install splunk-sdk'
-  action :run
+pip_packages.each do |pip_name, pip_dir_name|
+  execute "pip_#{pip_name}" do
+    command "pip install #{pip_name}"
+    not_if do ::Dir.exists?("/usr/local/lib/python2.7/dist-packages/#{pip_dir_name}") end
+    action :run
+  end
 end
-
 
 dirs = ['/nsm',
         '/nsm/scripts',

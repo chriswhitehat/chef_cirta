@@ -4,8 +4,7 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-package ['git', 'python2.7']
-
+package ['git', 'python2.7', 'python-ldap']
 
 
 dirs = ['/nsm',

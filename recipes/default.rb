@@ -4,6 +4,9 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
+package ['git', 'python2.7']
+
+
 
 dirs = ['/nsm',
         '/nsm/scripts',

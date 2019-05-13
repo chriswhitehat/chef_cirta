@@ -101,6 +101,7 @@ node[:users].each do |username|
     group username
     mode '0700'
     action :create
+    only_if do ::Dir.exists?("/home/#{username}") end
   end
 end
 

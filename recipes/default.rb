@@ -4,7 +4,13 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-package ['git', 'python2.7', 'python-ldap']
+package ['git', 'python2.7', 'python-ldap', 'python-pip']
+
+
+execute 'pip_pytz' do
+  command 'pip install pytz'
+  action :run
+end
 
 
 dirs = ['/nsm',

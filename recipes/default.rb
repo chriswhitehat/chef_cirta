@@ -10,6 +10,7 @@ package ['git', 'python2.7', 'python-ldap', 'python-pip']
 execute 'pip_pytz' do
   command 'pip install pytz'
   action :run
+  not_if do ::Dir.exists?('/usr/local/lib/python2.7/dist-packages/pytz') end
 end
 
 

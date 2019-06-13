@@ -105,3 +105,12 @@ node[:users].each do |username|
   end
 end
 
+
+##########################
+# Cirta Symlink
+##########################
+
+link '/usr/local/bin/cirta' do
+  to '/nsm/scripts/python/cirta/cirta.py'
+end
+

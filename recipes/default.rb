@@ -114,3 +114,20 @@ link '/usr/local/bin/cirta' do
   to '/nsm/scripts/python/cirta/cirta.py'
 end
 
+
+##########################
+# Actions Conf
+##########################
+
+actions = data_bag_item('cirta', 'test')
+
+template '/nsm/scripts/pythong/cirta/etc/local/actions.conf' do
+  source 'actions.conf.erb'
+  owner 'root'
+  group 'ir'
+  mode '0640'
+  variables {
+    actions: actions
+  }
+end
+

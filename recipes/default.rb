@@ -121,7 +121,7 @@ end
 
 actions = data_bag_item('cirta', 'test')
 
-template '/nsm/scripts/pythong/cirta/etc/local/actions.conf' do
+template '/nsm/scripts/python/cirta/etc/local/actions.conf' do
   source 'actions.conf.erb'
   owner 'root'
   group 'ir'

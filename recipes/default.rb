@@ -126,8 +126,8 @@ template '/nsm/scripts/pythong/cirta/etc/local/actions.conf' do
   owner 'root'
   group 'ir'
   mode '0640'
-  variables {
+  variables ({
     actions: actions
-  }
+  })
 end
 

@@ -127,8 +127,8 @@ template '/nsm/scripts/python/cirta/etc/local/actions.conf' do
   group 'ir'
   mode '0640'
   variables ({
-    pass: actions[:test][:pass],
-    pass2: actions[:test][:pass2]
+    pass: actions[:pass],
+    pass2: actions[:pass2]
   })
 end
 

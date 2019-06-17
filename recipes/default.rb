@@ -25,13 +25,14 @@ end
 
 dirs = ['/nsm',
         '/nsm/scripts',
-        '/nsm/scripts/python'
+        '/nsm/scripts/python',
+        '/nsm/scripts/python/cirta'
       ]
 
 dirs.each do |dir|
   directory dir do
     owner 'root'
-    group 'ir'
+    group node[:chef_cirta][:cirta_group]
     mode '0770'
     action :create
   end
@@ -42,11 +43,11 @@ end
 # Base directories
 ##########################
 
-git '/nsm/scripts/python/cirta' do
+git node[:chef_cirta][:cirta_home] do
   repository 'https://github.com/chriswhitehat/cirta.git'
   reference 'master'
   user 'root'
-  group 'ir'
+  group node[:chef_cirta][:cirta_group]
   action :sync
 end
 
@@ -56,25 +57,24 @@ end
 # Local directories
 ##########################
 
-dirs = ['/nsm',
-        '/nsm/scripts',
-        '/nsm/scripts/python',
-        '/nsm/scripts/python/cirta',
-        '/nsm/scripts/python/cirta/etc/local',
-        '/nsm/scripts/python/cirta/plugins/local',
-        '/nsm/scripts/python/cirta/plugins/local/actions',
-        '/nsm/scripts/python/cirta/plugins/local/initializers',
-        '/nsm/scripts/python/cirta/plugins/local/sources'
+
+dirs = ["#{node[:chef_cirta][:cirta_home]}/etc/local",
+        "#{node[:chef_cirta][:cirta_home]}/plugins/local",
+        "#{node[:chef_cirta][:cirta_home]}/plugins/local/actions",
+        "#{node[:chef_cirta][:cirta_home]}/plugins/local/initializers",
+        "#{node[:chef_cirta][:cirta_home]}/plugins/local/sources"
       ]
 
 dirs.each do |dir|
   directory dir do
     owner 'root'
-    group 'ir'
+    group node[:chef_cirta][:cirta_group]
     mode '0770'
     action :create
   end
 end
+
+
 
 
 ##########################
@@ -82,10 +82,10 @@ end
 ##########################
 
 ['', '/actions', '/initializers', '/sources'].each do |plugin_type|
-  file "/nsm/scripts/python/cirta/plugins/local#{plugin_type}/__init__.py" do
+  file "#{node[:chef_cirta][:cirta_home]}/plugins/local#{plugin_type}/__init__.py" do
     action :create
     owner 'root'
-    group 'ir'
+    group node[:chef_cirta][:cirta_group]
     mode '0640'
   end
 end
@@ -96,7 +96,7 @@ end
 ##########################
 
 node[:users].each do |username|
-  directory "/nsm/scripts/python/cirta/etc/#{username}" do
+  directory "#{node[:chef_cirta][:cirta_home]}/etc/#{username}" do
     owner username
     group username
     mode '0700'
@@ -111,24 +111,6 @@ end
 ##########################
 
 link '/usr/local/bin/cirta' do
-  to '/nsm/scripts/python/cirta/cirta.py'
-end
-
-
-##########################
-# Actions Conf
-##########################
-
-actions = data_bag_item('cirta', 'test')
-
-template '/nsm/scripts/python/cirta/etc/local/actions.conf' do
-  source 'actions.conf.erb'
-  owner 'root'
-  group 'ir'
-  mode '0640'
-  variables ({
-    pass: actions[:pass],
-    pass2: actions[:pass2]
-  })
+  to "#{node[:chef_cirta][:cirta_home]}/cirta.py"
 end
 

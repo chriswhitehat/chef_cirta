@@ -35,7 +35,7 @@ home_paths.each do |dir|
     group node[:chef_cirta][:cirta_group]
     mode '0770'
     action :create
-    not_if do ::Dir.exists?(hone_path) end
+    not_if do ::Dir.exists?(home_path) end
   end
 
 end

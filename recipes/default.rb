@@ -23,20 +23,32 @@ end
 # Base directories
 ##########################
 
-dirs = ['/nsm',
-        '/nsm/scripts',
-        '/nsm/scripts/python',
-        '/nsm/scripts/python/cirta'
-      ]
+home_paths = node[:chef_cirta][:cirta_home].split('/')[1..-1]
 
-dirs.each do |dir|
-  directory dir do
+home_path = '/'
+
+home_paths.each do |dir|
+  home_path += dir + "/"
+
+  directory home_path do
     owner 'root'
     group node[:chef_cirta][:cirta_group]
     mode '0770'
     action :create
+    not_if do ::Dir.exists?(hone_path) end
   end
+
 end
+
+# Ensure leaf directory permissions remain in tact via recursive directory
+directory node[:chef_cirta][:cirta_home] do
+  owner 'root'
+  group node[:chef_cirta][:cirta_group]
+  mode '0770'
+  action :create
+  recursive true
+end
+
 
 
 ##########################
@@ -113,4 +125,50 @@ end
 link '/usr/local/bin/cirta' do
   to "#{node[:chef_cirta][:cirta_home]}/cirta.py"
 end
+
+
+##########################
+# Conf etc/local
+##########################
+
+confs = ['actions', 'attributes', 'cirta', 'initializers', 'playbooks', 'sources']
+
+confs.each do |conf|
+
+  template "#{node[:chef_cirta][:cirta_home]}/etc/local/#{conf}.conf" do
+    cookbook "#{node[:chef_cirta][:implementation_cookbook]}"
+    source "etc/local/#{conf}.conf.erb"
+    owner 'root'
+    group node[:chef_cirta][:cirta_group]
+    mode '0640'
+    sensitive true
+  end
+
+end
+
+
+##########################
+# Plugins local
+##########################
+
+['actions', 'initializers', 'sources'].each do |plugin_type|
+
+  node[:chef_cirta][:plugins][:local][plugin_type].each do |plugin_name|
+
+    template "#{node[:chef_cirta][:cirta_home]}/plugins/local/#{plugin_type}/#{plugin_name}.py" do
+      cookbook "#{node[:chef_cirta][:implementation_cookbook]}"
+      source "plugins/local/#{plugin_type}/#{plugin_name}.py.erb"
+      owner 'root'
+      group node[:chef_cirta][:cirta_group]
+      mode '0640'
+      sensitive true
+    end
+
+  end
+
+end
+
+
+
+
 

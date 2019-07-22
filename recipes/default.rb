@@ -12,7 +12,7 @@ pip_packages = [['pytz', 'pytz'],
                 ['paramiko', 'paramiko'],
                 ['requests', 'requests'],
                 ['simplejson', 'simplejson'],
-                ['pySecurityCenter', 'pySecurityCenter']]
+                ['pySecurityCenter', 'securitycenter']]
 
 pip_packages.each do |pip_name, pip_dir_name|
   execute "pip_#{pip_name}" do

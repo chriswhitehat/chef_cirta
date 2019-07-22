@@ -9,7 +9,8 @@ package ['git', 'python2.7', 'python-ldap', 'python-pip']
 
 pip_packages = [['pytz', 'pytz'],
                 ['splunk-sdk', 'splunklib'],
-                ['paramiko', 'paramiko']]
+                ['paramiko', 'paramiko'],
+                ['requests', 'requests']]
 
 pip_packages.each do |pip_name, pip_dir_name|
   execute "pip_#{pip_name}" do
@@ -169,6 +170,31 @@ end
 end
 
 
+##########################
+# Resources
+##########################
 
 
+node[:chef_cirta][:resources].each do |resource, resource_files|
+
+  directory "#{node[:chef_cirta][:cirta_home]}/resources/#{resource}" do
+    owner 'root'
+    group node[:chef_cirta][:cirta_group]
+    mode '0750'
+    action :create
+  end
+  
+
+  resource_files.each do |resoucre_file|
+    template "#{node[:chef_cirta][:cirta_home]}/resources/#{resource}/#{resource_file}" do
+      cookbook "#{node[:chef_cirta][:implementation_cookbook]}"
+      source "resources/#{resource}/#{resource_file}.erb"
+      owner 'root'
+      group node[:chef_cirta][:cirta_group]
+      mode '0640'
+      sensitive true
+    end
+  end
+
+end
 

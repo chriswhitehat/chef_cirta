@@ -10,7 +10,8 @@ package ['git', 'python2.7', 'python-ldap', 'python-pip']
 pip_packages = [['pytz', 'pytz'],
                 ['splunk-sdk', 'splunklib'],
                 ['paramiko', 'paramiko'],
-                ['requests', 'requests']]
+                ['requests', 'requests'],
+                ['simplejson', 'simplejson']]
 
 pip_packages.each do |pip_name, pip_dir_name|
   execute "pip_#{pip_name}" do

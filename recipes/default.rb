@@ -11,7 +11,8 @@ pip_packages = [['pytz', 'pytz'],
                 ['splunk-sdk', 'splunklib'],
                 ['paramiko', 'paramiko'],
                 ['requests', 'requests'],
-                ['simplejson', 'simplejson']]
+                ['simplejson', 'simplejson'],
+                ['pySecurityCenter', 'pySecurityCenter']]
 
 pip_packages.each do |pip_name, pip_dir_name|
   execute "pip_#{pip_name}" do

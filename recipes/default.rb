@@ -175,26 +175,26 @@ end
 ##########################
 
 
-node[:chef_cirta][:resources].each do |resource, resource_files|
+# node[:chef_cirta][:resources].each do |resource, resource_files|
 
-  directory "#{node[:chef_cirta][:cirta_home]}/resources/#{resource}" do
-    owner 'root'
-    group node[:chef_cirta][:cirta_group]
-    mode '0750'
-    action :create
-  end
+#   directory "#{node[:chef_cirta][:cirta_home]}/resources/#{resource}" do
+#     owner 'root'
+#     group node[:chef_cirta][:cirta_group]
+#     mode '0750'
+#     action :create
+#   end
   
 
-  resource_files.each do |resoucre_file|
-    template "#{node[:chef_cirta][:cirta_home]}/resources/#{resource}/#{resource_file}" do
-      cookbook "#{node[:chef_cirta][:implementation_cookbook]}"
-      source "resources/#{resource}/#{resource_file}.erb"
-      owner 'root'
-      group node[:chef_cirta][:cirta_group]
-      mode '0640'
-      sensitive true
-    end
-  end
+#   resource_files.each do |resoucre_file|
+#     template "#{node[:chef_cirta][:cirta_home]}/resources/#{resource}/#{resource_file}" do
+#       cookbook "#{node[:chef_cirta][:implementation_cookbook]}"
+#       source "resources/#{resource}/#{resource_file}.erb"
+#       owner 'root'
+#       group node[:chef_cirta][:cirta_group]
+#       mode '0640'
+#       sensitive true
+#     end
+#   end
 
-end
+# end
 

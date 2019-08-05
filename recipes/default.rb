@@ -4,7 +4,7 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-package ['git', 'python2.7', 'python-ldap', 'python-pip', 'python-ipcalc']
+package ['git', 'python2.7', 'python-ldap', 'python-pip', 'python-ipcalc', 'nbtscan']
 
 
 pip_packages = [['pytz', 'pytz'],

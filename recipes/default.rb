@@ -6,6 +6,7 @@
 
 package ['git', 'python2.7', 'python-ldap', 'python-pip', 'python-ipcalc', 'nbtscan', 'whois', 'cifs-utils', 'syslog-ng']
 
+timezone 'UTC'
 
 pip_packages = [['pytz', 'pytz'],
                 ['splunk-sdk', 'splunklib'],

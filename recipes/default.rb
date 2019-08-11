@@ -4,7 +4,7 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-package ['git', 'python2.7', 'python-ldap', 'python-pip', 'python-ipcalc', 'nbtscan', 'whois', 'cifs-utils']
+package ['git', 'python2.7', 'python-ldap', 'python-pip', 'python-ipcalc', 'nbtscan', 'whois', 'cifs-utils', 'syslog-ng']
 
 
 pip_packages = [['pytz', 'pytz'],
@@ -77,7 +77,8 @@ dirs = ["#{node[:chef_cirta][:cirta_home]}/etc/local",
         "#{node[:chef_cirta][:cirta_home]}/plugins/local",
         "#{node[:chef_cirta][:cirta_home]}/plugins/local/actions",
         "#{node[:chef_cirta][:cirta_home]}/plugins/local/initializers",
-        "#{node[:chef_cirta][:cirta_home]}/plugins/local/sources"
+        "#{node[:chef_cirta][:cirta_home]}/plugins/local/sources",
+        "/var/log/cirta"
       ]
 
 dirs.each do |dir|
@@ -127,6 +128,29 @@ end
 
 link '/usr/local/bin/cirta' do
   to "#{node[:chef_cirta][:cirta_home]}/cirta.py"
+end
+
+##########################
+# Logging cirta.log
+##########################
+
+template '/etc/syslog-ng/conf.d/cirta.conf' do
+  source 'syslog-ng/cirta.conf.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  notifies :restart, 'service[syslog-ng]', :immediately
+end
+
+logrotate_app 'cirta_log' do
+  path      node[:chef_cirta][:syslog_ng][:path]
+  frequency 'daily'
+  rotate    365
+  create    "640 root #{node[:chef_cirta][:cirta_group]}"
+end
+
+service 'syslog-ng' do
+  action :nothing
 end
 
 

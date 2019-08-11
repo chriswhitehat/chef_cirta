@@ -9,7 +9,7 @@ source s_net_cirta { tcp(ip(<%= node[:chef_cirta][:syslog_ng][:listen_ip] %>) po
                      udp(ip(<%= node[:chef_cirta][:syslog_ng][:listen_ip] %>) port(<%= node[:chef_cirta][:syslog_ng][:port] %>) so_rcvbuf(67108864) ); };
 
 
-destination d_cirta { file("/var/log/cirta/cirta.log"); owner("root"); group("<%= node[:chef_cirta][:cirta_group] %>"); perm(0640); };
+destination d_cirta { file("/var/log/cirta/cirta.log" owner("root") group("<%= node[:chef_cirta][:cirta_group] %>") perm(0640) ); };
 
 log { source(s_net_cirta);
       destination(d_cirta);
@@ -19,7 +19,7 @@ log { source(s_net_cirta);
 #                     udp(ip(<%= node[:chef_cirta][:syslog_ng][:listen_ip] %>) port(<%= node[:chef_cirta][:syslog_ng][:port] %>) so_rcvbuf(67108864) ); };
 #
 #
-# destination d_cirta { file("<%= node[:chef_cirta][:syslog_ng][:path] %>"); owner("root"); group("<%= node[:chef_cirta][:cirta_group] %>"); perm(0640); };
+# destination d_cirta { file("/var/log/cirta/cirta.log" owner("root") group("<%= node[:chef_cirta][:cirta_group] %>") perm(0640) ); };
 # 
 # log { source(s_net_cirta);
 #      destination(d_cirta);

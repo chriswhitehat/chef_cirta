@@ -75,6 +75,7 @@ end
 
 
 dirs = ["#{node[:chef_cirta][:cirta_home]}/etc/local",
+        "#{node[:chef_cirta][:cirta_home]}/etc/users",
         "#{node[:chef_cirta][:cirta_home]}/plugins/local",
         "#{node[:chef_cirta][:cirta_home]}/plugins/local/actions",
         "#{node[:chef_cirta][:cirta_home]}/plugins/local/initializers",
@@ -113,7 +114,7 @@ end
 ##########################
 
 node[:users].each do |username|
-  directory "#{node[:chef_cirta][:cirta_home]}/etc/#{username}" do
+  directory "#{node[:chef_cirta][:cirta_home]}/etc/users/#{username}" do
     owner username
     group username
     mode '0700'

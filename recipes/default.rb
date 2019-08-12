@@ -14,8 +14,8 @@ pip_packages = [['pytz', 'pytz'],
                 ['requests', 'requests'],
                 ['simplejson', 'simplejson'],
                 ['pySecurityCenter', 'securitycenter'],
-                ['google-api-python-client', 'googleapiclient',
-                ['oauth2client', '']]
+                ['google-api-python-client', 'googleapiclient'],
+                ['oauth2client', 'oauth2client']
               ]
 
 pip_packages.each do |pip_name, pip_dir_name|

@@ -13,7 +13,9 @@ pip_packages = [['pytz', 'pytz'],
                 ['paramiko==2.5.1', 'paramiko'],
                 ['requests', 'requests'],
                 ['simplejson', 'simplejson'],
-                ['pySecurityCenter', 'securitycenter']]
+                ['pySecurityCenter', 'securitycenter'],
+                ['google-api-python-client', 'google-api-python-client']
+              ]
 
 pip_packages.each do |pip_name, pip_dir_name|
   execute "pip_#{pip_name}" do

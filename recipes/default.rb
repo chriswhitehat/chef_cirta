@@ -10,7 +10,7 @@ timezone 'UTC'
 
 pip_packages = [['pytz', 'pytz'],
                 ['splunk-sdk', 'splunklib'],
-                ['paramiko', 'paramiko'],
+                ['paramiko==2.5.1', 'paramiko'],
                 ['requests', 'requests'],
                 ['simplejson', 'simplejson'],
                 ['pySecurityCenter', 'securitycenter']]

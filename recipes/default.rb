@@ -28,7 +28,7 @@ end
 
 pip_packages.each do |pip_name, pip_dir_name|
   execute "pip3_#{pip_name}" do
-    command "pip3 install #{pip_name}"
+    command "pip3 install #{pip_name} --ignore-installed"
     not_if do ::Dir.exists?("/usr/local/lib/python3.5/dist-packages/#{pip_dir_name}") end
     action :run
   end

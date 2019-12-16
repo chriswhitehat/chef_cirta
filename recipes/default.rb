@@ -4,7 +4,8 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-package ['git', 'python2.7', 'python-ldap', 'python-pip', 'python-ipcalc', 'nbtscan', 'whois', 'cifs-utils', 'syslog-ng', 'python-httplib2']
+package ['curl', 'git', 'python2.7', 'python-ldap', 'python-ipcalc', 'nbtscan', 'whois', 'cifs-utils', 'syslog-ng', 'python-httplib2', 'python3-ldap3']
+
 
 timezone node[:chef_cirta][:timezone]
 
@@ -18,10 +19,17 @@ pip_packages = [['pytz', 'pytz'],
                 ['oauth2client', 'oauth2client']
               ]
 
+execute 'install_pip' do
+  command 'curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && python3 /tmp/get-pip.py --force-reinstall'
+  not_if do ::File.exist?("/usr/local/bin/pip3") end
+  action :run
+end
+
+
 pip_packages.each do |pip_name, pip_dir_name|
-  execute "pip_#{pip_name}" do
-    command "pip install #{pip_name}"
-    not_if do ::Dir.exists?("/usr/local/lib/python2.7/dist-packages/#{pip_dir_name}") end
+  execute "pip3_#{pip_name}" do
+    command "pip3 install #{pip_name}"
+    not_if do ::Dir.exists?("/usr/local/lib/python3.5/dist-packages/#{pip_dir_name}") end
     action :run
   end
 end

@@ -16,7 +16,8 @@ pip_packages = [['pytz', 'pytz'],
                 ['simplejson', 'simplejson'],
                 ['pySecurityCenter', 'securitycenter'],
                 ['google-api-python-client', 'googleapiclient'],
-                ['oauth2client', 'oauth2client']
+                ['oauth2client', 'oauth2client'],
+                ['httplib2', 'httplib2']
               ]
 
 execute 'install_pip' do

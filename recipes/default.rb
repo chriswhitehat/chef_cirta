@@ -4,7 +4,7 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-package ['curl', 'git', 'python2.7', 'python-ldap', 'python-ipcalc', 'nbtscan', 'whois', 'cifs-utils', 'syslog-ng', 'python3-httplib2', 'python3-ldap3']
+package ['curl', 'git', 'python2.7', 'python-ldap', 'python-ipcalc', 'nbtscan', 'whois', 'cifs-utils', 'syslog-ng', 'python3-crypto', 'python3-httplib2', 'python3-ldap3']
 
 
 timezone node[:chef_cirta][:timezone]

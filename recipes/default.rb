@@ -18,7 +18,7 @@ pip_packages = [['pytz', 'pytz'],
                 ['google-api-python-client', 'googleapiclient'],
                 ['oauth2client', 'oauth2client'],
                 ['httplib2', 'httplib2'],
-                ['axonius-api-client', 'axonius-api-client'],
+                ['axonius-api-client', 'axonius_api_client'],
                 ['pathlib2', 'pathlib2']
               ]
 

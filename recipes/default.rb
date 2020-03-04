@@ -17,7 +17,8 @@ pip_packages = [['pytz', 'pytz'],
                 ['pySecurityCenter', 'securitycenter'],
                 ['google-api-python-client', 'googleapiclient'],
                 ['oauth2client', 'oauth2client'],
-                ['httplib2', 'httplib2']
+                ['httplib2', 'httplib2'],
+                ['axonius-api-client', 'axonius-api-client']
               ]
 
 execute 'install_pip' do
